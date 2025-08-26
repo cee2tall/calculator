@@ -24,13 +24,19 @@ body {
 }
 
 #screen {
-  text-align: right;
   /* border: 1px solid black; */
   width: 100%;
   height: 13%;
   border-radius: 5px;
   background-color: rgb(172, 233, 144);
   box-shadow: inset 0 0 2px rgb(94, 139, 82);
+  color: rgb(53, 53, 53);
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-weight: 900;
+  font-size: 40px;
+  padding-right: 5px;
 }
 
 #buttons {

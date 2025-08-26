@@ -24,4 +24,17 @@ function operate(left, right, operator) {
   }
 }
 
+// const numberButtons = document.querySelectorAll(".number");
+// numberButtons.array.forEach((element) => {});
+
+const screen = document.querySelector("#screen");
+const smallButtons = document.querySelector("#small-buttons");
+smallButtons.addEventListener("click", (event) => {
+  let target = event.target;
+  if (target.id === "small-buttons") {
+    return;
+  }
+  screen.innerText += target.innerText;
+});
+
 let left, right, operator;
