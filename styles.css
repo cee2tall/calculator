@@ -14,25 +14,53 @@ body {
   height: 500px;
   margin: auto;
   padding: 10px;
+  border-radius: 10px;
 }
 
 #screen {
   text-align: right;
   border: 1px solid black;
   width: 100%;
-  height: 50px;
-}
-
-#buttons,
-#big-buttons {
-  display: flex;
+  height: 13%;
+  border-radius: 5px;
 }
 
 #buttons {
-  background-color: rebeccapurple;
+  display: flex;
+  height: 87%;
+}
+
+#small-buttons {
+  /* background-color: rebeccapurple; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 8px 5px 5px 0;
+  align-content: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 #big-buttons {
-  width: 20%;
-  background-color: blue;
+  width: 25%;
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 0;
+}
+
+#big-buttons button {
+  height: 50%;
+}
+
+#small-buttons button {
+  height: 24%;
+  width: 22%;
+}
+
+#buttons button {
+  background-color: white;
+  border: 1.5px solid black;
+  border-radius: 5px;
 }
