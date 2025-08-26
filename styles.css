@@ -1,0 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 50px;
+}
+
+#calculator {
+  border: 1px solid black;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  padding: 10px;
+}
+
+#screen {
+  text-align: right;
+  border: 1px solid black;
+  width: 100%;
+  height: 50px;
+}
+
+#buttons,
+#big-buttons {
+  display: flex;
+}
+
+#buttons {
+  background-color: rebeccapurple;
+}
+
+#big-buttons {
+  width: 20%;
+  background-color: blue;
+}
