@@ -58,8 +58,7 @@ function opButtonClicked(target) {
 
 function numButtonClicked(target) {
   if (currStage === 2) {
-    screen.innerText = "";
-    currStage = 1;
+    resetCalc();
   }
   screen.innerText += target.innerText;
   lastClicked = 0;
@@ -77,6 +76,18 @@ function equalsButtonClicked() {
   } else if (lastClicked === 0) {
     screen.innerText = "" + operate(left, screen.innerText, operator);
     currStage = 2;
+  }
+}
+
+function decimalButtonClicked() {
+  if (screen.innerText.indexOf(".") === -1) {
+    if (currStage === 2) {
+      resetCalc();
+    }
+    if (screen.innerText.length === 0) {
+      screen.innerText += "0";
+    }
+    screen.innerText += ".";
   }
 }
 
@@ -98,6 +109,8 @@ smallButtons.addEventListener("click", (event) => {
     eraseButtonClicked();
   } else if (target.classList.contains("operator")) {
     opButtonClicked(target);
+  } else if (target.id === "decimal") {
+    decimalButtonClicked();
   } else {
     numButtonClicked(target);
   }
