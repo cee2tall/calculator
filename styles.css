@@ -37,6 +37,7 @@ body {
   font-weight: 900;
   font-size: 40px;
   padding-right: 5px;
+  flex-wrap: wrap;
 }
 
 #buttons {
@@ -81,8 +82,8 @@ body {
   font-weight: 900;
 }
 
-#big-buttons #equals,
-#buttons .clear {
+#big-buttons button,
+#buttons #erase {
   background-color: rgb(235, 91, 91);
 }
 
