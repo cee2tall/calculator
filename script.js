@@ -19,7 +19,7 @@ function operate(left, right, operator) {
       return add(leftNum, rightNum);
     case "-":
       return subtract(leftNum, rightNum);
-    case "*":
+    case "x":
       return multiply(leftNum, rightNum);
     case "/":
       return divide(leftNum, rightNum);
@@ -70,6 +70,7 @@ bigButtons.addEventListener("click", (event) => {
     currStage = 1;
   } else {
     screen.innerText = "" + operate(left, screen.innerText, operator);
+    currStage = 2;
   }
   operator = undefined;
 });
