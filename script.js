@@ -8,24 +8,79 @@ function multiply(a, b) {
   return a * b;
 }
 function divide(a, b) {
+  if (b === 0) {
+    alert("Error: Division by 0");
+    resetCalc();
+    return "";
+  }
   return a / b;
 }
 
 function operate(left, right, operator) {
   let leftNum = +left,
-    rightNum = +right;
+    rightNum = +right,
+    result;
   switch (operator) {
     case "+":
-      return add(leftNum, rightNum);
+      result = add(leftNum, rightNum);
+      break;
     case "-":
-      return subtract(leftNum, rightNum);
+      result = subtract(leftNum, rightNum);
+      break;
     case "x":
-      return multiply(leftNum, rightNum);
+      result = multiply(leftNum, rightNum);
+      break;
     case "/":
-      return divide(leftNum, rightNum);
+      result = divide(leftNum, rightNum);
+      break;
+  }
+  if (result === "") {
+    return result;
+  }
+  return Math.round((result + Number.EPSILON) * 1000) / 1000;
+}
+
+function resetCalc() {
+  screen.innerText = "";
+  currStage = 1;
+}
+
+function opButtonClicked(target) {
+  if (operator !== undefined && lastClicked === 0) {
+    screen.innerText = "" + operate(left, screen.innerText, operator);
+  }
+  left = screen.innerText;
+  operator = target.innerText;
+  currStage = 2;
+  console.log(`left: ${left} and operator ${operator}`);
+  lastClicked = 1;
+}
+
+function numButtonClicked(target) {
+  if (currStage === 2) {
+    screen.innerText = "";
+    currStage = 1;
+  }
+  screen.innerText += target.innerText;
+  lastClicked = 0;
+}
+
+function eraseButtonClicked() {
+  if (screen.innerText.length > 0) {
+    screen.innerText = screen.innerText.slice(0, -1);
   }
 }
 
+function equalsButtonClicked() {
+  if (operator === undefined) {
+    return;
+  } else if (lastClicked === 0) {
+    screen.innerText = "" + operate(left, screen.innerText, operator);
+    currStage = 2;
+  }
+}
+
+let lastClicked = 0; //0 for number, 1 for operator
 let left = 0,
   right,
   operator;
@@ -37,43 +92,25 @@ const bigButtons = document.querySelector("#big-buttons");
 smallButtons.addEventListener("click", (event) => {
   let target = event.target;
   if (target.id === "small-buttons") {
+    // User can click the div that contains all of the buttons, just return if they do
     return;
   } else if (target.id === "erase") {
-    if (screen.innerText.length > 0) {
-      screen.innerText = screen.innerText.slice(0, -1);
-    }
-    return;
+    eraseButtonClicked();
   } else if (target.classList.contains("operator")) {
-    if (operator !== undefined) {
-      screen.innerText = "" + operate(left, screen.innerText, operator);
-    }
-    left = screen.innerText;
-    operator = target.innerText;
-    currStage = 2;
-    console.log(`left: ${left} and operator ${operator}`);
-
-    return;
+    opButtonClicked(target);
   } else {
-    if (currStage === 2) {
-      screen.innerText = "";
-      currStage = 1;
-    }
-    screen.innerText += target.innerText;
+    numButtonClicked(target);
   }
 });
 
 bigButtons.addEventListener("click", (event) => {
   let target = event.target;
   if (target.id === "clear") {
-    screen.innerText = "";
-    operator = undefined;
-    currStage = 1;
-  } else {
-    screen.innerText = "" + operate(left, screen.innerText, operator);
-    currStage = 2;
+    resetCalc();
+  } else if (target.id === "equals") {
+    equalsButtonClicked();
   }
   operator = undefined;
 });
 
 // "5 + 10 * 10 - 10"
-// "5 +(STAGE 2) 1(STAGE 3)0 * 10"
